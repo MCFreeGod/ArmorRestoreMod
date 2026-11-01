@@ -1,0 +1,45 @@
+# Gradle
+.gradle/
+build/
+out/
+
+# Dev run directories (worlds, logs, configs written by the dev server/client)
+run/
+runs/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+bin/
+
+# Local machine configuration
+# ~/.gradle/gradle.properties is outside the repo, but people sometimes drop a
+# project-local one to point at their JDK 25 install.
+gradle.properties.local
+local.properties
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and crash reports
+*.log
+logs/
+crash-reports/
+
+# Built artifacts kept outside build/ by hand.
+# The wrapper jar is the one .jar that belongs in the repository — without it
+# ./gradlew cannot bootstrap. Negations must come after the rule they exempt.
+*.jar
+!**/gradle/wrapper/gradle-wrapper.jar
+
+# Python bytecode from tools/make_icon.py
+__pycache__/
+*.pyc

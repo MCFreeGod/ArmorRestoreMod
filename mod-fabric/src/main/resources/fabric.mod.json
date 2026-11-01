@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "Armor actually protects you again. Restores the pre-1.9 formula where every armor point removes 4% of incoming damage, giving a full diamond set a flat 80% reduction no matter how hard the hit. Armor toughness no longer scales the result. Shields, resistance, durability and all other combat mechanics stay vanilla.",
+  "authors": [
+    "MCFreeGod"
+  ],
+  "license": "MIT",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.mcfreegod.armorrestore.ArmorRestoreMod"
+    ],
+    "client": [
+      "com.mcfreegod.armorrestore.client.ArmorRestoreClient"
+    ]
+  },
+  "mixins": [
+    "armorrestore.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": ">=${fabric_api_version}",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=25"
+  }
+}

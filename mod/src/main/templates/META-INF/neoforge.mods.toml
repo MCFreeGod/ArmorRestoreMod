@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="MIT"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="MCFreeGod"
+# Square mod-list icon. `logoFile` is deprecated since 26.x; `iconFile` is the replacement.
+iconFile="icon.png"
+description='''
+Armor actually protects you again. Restores the pre-1.9 formula where every armor point removes 4% of incoming damage, giving a full diamond set a flat 80% reduction no matter how hard the hit. Armor toughness no longer scales the result. Shields, resistance, durability and all other combat mechanics stay vanilla.
+'''
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neoforge_version}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version}"
+    ordering="NONE"
+    side="BOTH"

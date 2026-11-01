@@ -1,0 +1,81 @@
+plugins {
+    // Unobfuscated-era Loom plugin (MC 26.x ships without obfuscation, so no
+    // mappings are needed and the remap variant is not used).
+    id 'net.fabricmc.fabric-loom' version '1.18.2'
+    id 'maven-publish'
+}
+
+version = "${project.mod_version}-${project.minecraft_version}"
+group = project.mod_group_id
+
+base {
+    // Platform prefix, mirroring the NeoForge build so the two jars cannot be confused.
+    archivesName = "[Fabric] ${project.mod_id}"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    // No mappings line on purpose: Minecraft 26.x is unobfuscated.
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+loom {
+    runs {
+        server {
+            server()
+            vmArg "-Darmorrestore.selftest=true"
+            runDir "run"
+        }
+    }
+}
+
+processResources {
+    def expandProps = [
+            mod_id            : project.mod_id,
+            mod_name          : project.mod_name,
+            mod_version       : project.mod_version,
+            minecraft_version : project.minecraft_version,
+            loader_version    : project.loader_version,
+            fabric_api_version: project.fabric_api_version
+    ]
+    inputs.properties expandProps
+    filesMatching(['fabric.mod.json']) {
+        expand expandProps
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 25
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// Ship the licence inside the jar: MIT requires the notice to travel with
+// copies of the software, and mod files get passed around on their own.
+// This project is its own Gradle root, so the licence is read from the parent
+// directory that holds both platform projects.
+jar {
+    def licence = file('../LICENSE')
+    if (licence.exists()) {
+        from(licence) {
+            rename { 'LICENSE-armorrestore' }
+        }
+    }
+}

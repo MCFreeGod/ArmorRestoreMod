@@ -1,0 +1,26 @@
+pluginManagement {
+    repositories {
+        // Official NeoForged maven first (plugin markers live here), then the
+        // Gradle Plugin Portal.
+        maven {
+            name = 'NeoForged'
+            url = 'https://maven.neoforged.net/releases'
+        }
+        gradlePluginPortal()
+        // Optional China mirror. Off by default so builds elsewhere are not slowed
+        // down by an unreachable host; enable with `-PcnMirror` or by adding
+        // `cnMirror=true` to ~/.gradle/gradle.properties.
+        if (providers.gradleProperty('cnMirror').isPresent()) {
+            maven {
+                name = 'NeoForgedMirror'
+                url = 'https://bmclapi2.bangbang93.com/maven'
+            }
+        }
+    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
+rootProject.name = 'ArmorRestoreMod'
