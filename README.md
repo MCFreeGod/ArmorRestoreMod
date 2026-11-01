@@ -46,10 +46,9 @@ The 1.21 Breach enchantment is kept functional: it still lowers your effective a
 
 ## Compatibility
 
-- **NeoForge** 26.3.0.48-beta · Minecraft 26.3
-- **Fabric** 0.19.5 + Fabric API 0.161.0+26.3 · Minecraft 26.3
+Available for **NeoForge** and **Fabric**. Each release targets a specific Minecraft version — check the version list on the download page before installing, since the game's damage pipeline has changed between major versions and a jar built for one will not run on another.
 
-Both versions behave identically and share the same config fields. Client and server side: the damage logic runs on the server; the tooltip cleanup runs on the client. Install it on the server for multiplayer (the client copy is optional and only affects tooltip text).
+Both loaders behave identically and share the same config fields. Client and server side: the damage logic runs on the server; the tooltip cleanup runs on the client. Install it on the server for multiplayer (the client copy is optional and only affects tooltip text).
 
 ## Configuration
 
@@ -106,7 +105,7 @@ The damage logic (`OldArmorReduction`) and the tooltip filter (`ToughnessTooltip
 
 ## Building
 
-Requires **JDK 25** — Minecraft 26.x class files are major version 69. Gradle provisions it via the toolchain resolver, so any JDK 25 installation it can find is enough.
+Requires the JDK version declared by the project's Gradle toolchain (`java.toolchain` in `build.gradle`). Gradle provisions it automatically via the toolchain resolver, so any matching JDK it can find on your machine is enough — you do not need to set one up by hand.
 
 ```bash
 cd mod          # or mod-fabric
@@ -132,7 +131,7 @@ If you are behind the Great Firewall and the NeoForged maven is slow, add `-PcnM
 
 ## Documentation
 
-- [`docs/armor-mechanism-investigation.md`](docs/armor-mechanism-investigation.md) — how damage flows through 26.x, where armor reduction actually happens, and how it differs from 1.8.9.
+- [`docs/armor-mechanism-investigation.md`](docs/armor-mechanism-investigation.md) — how damage flows through the modern game, where armor reduction actually happens, and how it differs from 1.8.9.
 - [`docs/implementation-contract.md`](docs/implementation-contract.md) — the implementation decisions, the NeoForge/Fabric hook points, and the change log.
 
 These were written during development, in Chinese, and reference line numbers in decompiled sources that are not redistributed here (they would be copyright-infringing). They are published as a record of the reasoning, not as a tutorial.
