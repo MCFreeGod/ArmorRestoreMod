@@ -16,13 +16,16 @@ Armor actually protects you again. Restores the pre-1.9 formula where every armo
 [[dependencies.${mod_id}]]
     modId="neoforge"
     type="required"
-    versionRange="${neoforge_version}"
+    # A bare version string is parsed by Maven's VersionRange as an exact pin,
+    # which would lock the mod to one loader build. Accept any NeoForge for
+    # this Minecraft version instead.
+    versionRange="[${minecraft_version},)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.${mod_id}]]
     modId="minecraft"
     type="required"
-    versionRange="${minecraft_version}"
+    versionRange="[${minecraft_version}]"
     ordering="NONE"
     side="BOTH"

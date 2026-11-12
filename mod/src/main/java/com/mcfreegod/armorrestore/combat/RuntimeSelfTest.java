@@ -6,6 +6,7 @@ import com.mojang.logging.LogUtils;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -153,9 +154,12 @@ public final class RuntimeSelfTest {
     }
 
     private static boolean declaresModifier(ItemStack stack, Holder<Attribute> attribute) {
+        // Holder.is(Holder) is deprecated; it just forwards to is(ResourceKey), so
+        // compare the keys directly.
+        ResourceKey<Attribute> key = attribute.unwrapKey().orElseThrow();
         boolean[] found = {false};
         stack.forEachModifier(EquipmentSlotGroup.CHEST,
-                (attr, modifier, display) -> found[0] |= attr.is(attribute));
+                (attr, modifier, display) -> found[0] |= attr.is(key));
         return found[0];
     }
 }

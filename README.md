@@ -122,7 +122,7 @@ There is also an opt-in runtime self-test that asserts the reduction math inside
 
 ```bash
 cd mod        && ./gradlew runServer -Pselftest
-cd mod-fabric && ./gradlew runServer
+cd mod-fabric && ./gradlew runServer -Pselftest
 ```
 
 It logs one `PASS`/`FAIL` line per assertion (armor 0 / 10 / 20, fall-damage regression, tooltip contents) and does not affect normal gameplay.

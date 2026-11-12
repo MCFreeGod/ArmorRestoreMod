@@ -16,6 +16,10 @@ package com.mcfreegod.armorrestore.combat;
  *
  * <p>Armor Toughness is intentionally absent from this API: the old mechanic must not
  * read {@code ARMOR_TOUGHNESS}, and the absence of the parameter enforces that.</p>
+ *
+ * <p>This class is intentionally duplicated (source-identical) between the NeoForge and
+ * Fabric projects of this mod: it has no platform dependency, and keeping it a copy
+ * avoids a multi-project build for a single stable file.</p>
  */
 public final class OldArmorReduction {
     public static final int DEFAULT_CLAMP_MIN = 0;

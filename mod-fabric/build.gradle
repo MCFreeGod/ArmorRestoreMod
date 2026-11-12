@@ -32,7 +32,10 @@ loom {
     runs {
         server {
             server()
-            vmArg "-Darmorrestore.selftest=true"
+            // Opt-in runtime verification: ./gradlew runServer -Pselftest
+            if (project.hasProperty('selftest')) {
+                vmArg "-Darmorrestore.selftest=true"
+            }
             runDir "run"
         }
     }
