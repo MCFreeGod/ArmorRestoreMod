@@ -7,9 +7,12 @@ version = "${project.mod_version}-${project.minecraft_version}"
 group = project.mod_group_id
 
 base {
-    // Platform prefix keeps the two platform jars distinguishable, since both are
-    // published under the same mod id.
-    archivesName = "[NeoForge] ${project.mod_id}"
+    // Platform suffix keeps the two platform jars distinguishable, since both are
+    // published under the same mod id. No brackets or spaces: GitHub rewrites any
+    // character outside [A-Za-z0-9._-] in release asset names, which would turn
+    // "[NeoForge] armorrestore.jar" into "NeoForge.armorrestore.jar".
+    // Gradle appends "<version>" automatically, so only the base name goes here.
+    archivesName = "${project.mod_id}-neoforge"
 }
 
 java {

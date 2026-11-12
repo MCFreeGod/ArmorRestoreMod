@@ -95,8 +95,8 @@ The 1.9 Combat Update replaced flat percentage armor with a toughness-based form
 This is a single repository holding two independent Gradle projects, one per mod loader. They share no build configuration on purpose — each is its own Gradle root and can be opened in an IDE on its own.
 
 ```
-mod/         NeoForge build  → [NeoForge] armorrestore-<version>-<mc>.jar
-mod-fabric/  Fabric build    → [Fabric] armorrestore-<version>-<mc>.jar
+mod/         NeoForge build  → armorrestore-<version>-<mc>-neoforge.jar
+mod-fabric/  Fabric build    → armorrestore-<version>-<mc>-fabric.jar
 docs/        Design and investigation notes
 tools/       Icon generator (not needed to build the mod)
 ```

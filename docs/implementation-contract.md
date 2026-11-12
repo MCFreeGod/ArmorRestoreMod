@@ -25,7 +25,7 @@
 > - **配置**：新增 `hideArmorToughnessTooltip`（NeoForge）/ `hideArmorToughness`（Fabric），默认 `true`，受总开关 `enabled` 门控。
 > - **验证**：两端单测 17/17（原 10 项 + 新增 7 项 tooltip 过滤测试）；两端运行时自测新增钻石胸甲断言——**并带前置断言**（先确认胸甲确实声明了 toughness，否则"没有韧性行"会空过），结果 `declares toughness=true | armor line present=true | toughness line present=false -> PASS`。NeoForge 侧另以**实际部署的 jar** 在独立游戏目录、独立 classpath 下完成生产环境端到端验证。
 > - **NeoForge 单测 classpath**：MDG 默认不把 MC 放进测试 classpath，其官方 `neoForge.unitTest { enable() }` 会引入 `net.neoforged.fancymodloader:junit-fml`，该构件**不在任何可达仓库**（镜像 404、官方源直连被重置）。改用 `sourceSets.test.compileClasspath/runtimeClasspath += sourceSets.main.*` 复用主 classpath 即可满足需要（测试仅构造 `Component`；`TranslatableContents` 的开发期参数校验在 FML 缺席时自动跳过，见其源码注释）。
-> - **产物命名**：两端 jar 加平台前缀以区分——`[NeoForge] armorrestore-0.1.0-26.3.jar` / `[Fabric] armorrestore-0.1.0-26.3.jar`（经 `base.archivesName`）。内部 mod 版本仍为 `0.1.0`。
+> - **产物命名**：两端 jar 加平台后缀以区分——`armorrestore-0.1.0-26.3-neoforge.jar` / `armorrestore-0.1.0-26.3-fabric.jar`（经 `base.archivesName`）。内部 mod 版本仍为 `0.1.0`。**不用方括号/空格**：GitHub Release 会把 `[A-Za-z0-9._-]` 之外的字符改写成点号，`[NeoForge] armorrestore.jar` 会变成 `NeoForge.armorrestore.jar`。
 >
 > **变更记录（2026-11-01）：包名迁移 + mod 图标。**
 > - **包名**：`com.armorrestore` → **`com.mcfreegod.armorrestore`**（两端一致，`mod_group_id` 同步更新）。涉及全部 `package`/`import` 声明、Fabric `fabric.mod.json` 的 `entrypoints`、`armorrestore.mixins.json` 的 `package`。**mod id 保持 `armorrestore` 不变**——它是存档与配置的持久化标识（`config/armorrestore.json`、`armorrestore-local.toml`、ModList 条目），改它会让玩家已有配置失联，与包名无关。

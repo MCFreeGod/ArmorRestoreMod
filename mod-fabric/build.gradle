@@ -9,8 +9,11 @@ version = "${project.mod_version}-${project.minecraft_version}"
 group = project.mod_group_id
 
 base {
-    // Platform prefix, mirroring the NeoForge build so the two jars cannot be confused.
-    archivesName = "[Fabric] ${project.mod_id}"
+    // Platform suffix, mirroring the NeoForge build so the two jars cannot be
+    // confused. No brackets or spaces: GitHub rewrites any character outside
+    // [A-Za-z0-9._-] in release asset names.
+    // Gradle appends "<version>" automatically, so only the base name goes here.
+    archivesName = "${project.mod_id}-fabric"
 }
 
 repositories {
